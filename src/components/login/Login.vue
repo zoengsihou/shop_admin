@@ -30,17 +30,17 @@ export default {
   data() {
     return {
       loginForm: {
-        username: '',
-        password: ''
+        username: 'admin',
+        password: '123456'
       },
       rules: {
         username: [
           { required: true, message: '请输入用户名', trigger: 'blur' },
-          { min: 3, max: 6, message: '长度在 3 到 6 个字符', trigger: 'blur' }
+          { min: 3, max: 12, message: '长度在 3 到 12 个字符', trigger: 'blur' }
         ],
         password: [
           { required: true, message: '请输入密码', trigger: 'blur' },
-          { min: 3, max: 6, message: '长度在 3 到 6 个字符', trigger: 'blur' }
+          { min: 3, max: 12, message: '长度在 3 到 12 个字符', trigger: 'blur' }
         ]
       }
     }
@@ -53,9 +53,15 @@ export default {
         .then(res => {
           //  ES6中的解构，从res.data中取出属性data和meta
           const { data, meta } = res.data
-          console.log(data)
+          // console.log(data)
           if (meta.status === 200) {
-            console.log('登录成功')
+            this.$message({
+              type: 'success',
+              message: meta.msg,
+              duration: 1000
+            })
+            //  将返回的token存储到LocalStorage中
+            localStorage.setItem('token', data.token)
             //  登录成功，需要跳转到后台管理的首页
             this.$router.push('home')
           } else {
