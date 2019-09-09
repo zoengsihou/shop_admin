@@ -1,10 +1,54 @@
 <template>
-  <div>用户列表</div>
+  <div>
+    <el-table :data="userList" stripe>
+      <el-table-column prop="username" label="姓名" width="180">
+      </el-table-column>
+      <el-table-column prop="email" label="邮箱" width="180">
+      </el-table-column>
+      <el-table-column prop="mobile" label="电话">
+      </el-table-column>
+      <el-table-column prop="mg_state" label="用户状态">
+      </el-table-column>
+      <el-table-column prop="address" label="操作">
+      </el-table-column>
+    </el-table>
+  </div>
 </template>
 
 <script>
-export default {
+import axios from 'axios'
 
+export default {
+  created() {
+    this.getUserList()
+  },
+
+  methods: {
+    //  获取用户列表数据
+    getUserList() {
+      axios.get('http://localhost:8888/api/private/v1/users', {
+        headers: {
+          Authorization: localStorage.getItem('token')
+        },
+        params: {
+          pagenum: 1,
+          pagesize: 3
+        }
+      })
+        .then(res => {
+          const { data, meta } = res.data
+          if (meta.status === 200) {
+            this.userList = data.users
+          }
+        })
+    }
+  },
+
+  data() {
+    return {
+      userList: []
+    }
+  }
 }
 </script>
 
