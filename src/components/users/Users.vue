@@ -16,7 +16,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 
 export default {
   created() {
@@ -26,15 +25,16 @@ export default {
   methods: {
     //  获取用户列表数据
     getUserList() {
-      axios.get('http://localhost:8888/api/private/v1/users', {
-        headers: {
-          Authorization: localStorage.getItem('token')
-        },
-        params: {
-          pagenum: 1,
-          pagesize: 3
-        }
-      })
+      this.$http
+        .get('/users', {
+          // headers: {
+          //   Authorization: localStorage.getItem('token')
+          // },
+          params: {
+            pagenum: 1,
+            pagesize: 3
+          }
+        })
         .then(res => {
           const { data, meta } = res.data
           if (meta.status === 200) {

@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+// import axios from 'axios'
 
 export default {
   data() {
@@ -48,8 +48,8 @@ export default {
   methods: {
     login() {
       //  http://localhost:8888/api/private/v1/
-      axios
-        .post('http://localhost:8888/api/private/v1/login', this.loginForm)
+      this.$http
+        .post('/login', this.loginForm)
         .then(res => {
           //  ES6中的解构，从res.data中取出属性data和meta
           const { data, meta } = res.data
