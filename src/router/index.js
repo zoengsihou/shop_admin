@@ -22,7 +22,7 @@ const router = new Router({
 //  所有的路由都会先走守卫
 //  添加导航守卫后，不管访问哪个路由，都会先执行回调函数
 router.beforeEach((to, from, next) => {
-  console.log('导航守卫')
+  // console.log('导航守卫')
   if (to.path === '/login') {
     next()
   } else {
