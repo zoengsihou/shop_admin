@@ -25,6 +25,7 @@
               <i class="el-icon-location"></i>
               <span>用户管理</span>
             </template>
+
             <el-menu-item index="/home/users">
               <template slot="title">
                 <i class="el-icon-menu"></i>
@@ -38,10 +39,18 @@
               <i class="el-icon-location"></i>
               <span>权限管理</span>
             </template>
+
             <el-menu-item index="2-1">
               <template slot="title">
                 <i class="el-icon-menu"></i>
-                <span>用户列表</span>
+                <span>角色列表</span>
+              </template>
+            </el-menu-item>
+
+            <el-menu-item index="/home/rights">
+              <template slot="title">
+                <i class="el-icon-menu"></i>
+                <span>权限列表</span>
               </template>
             </el-menu-item>
           </el-submenu>

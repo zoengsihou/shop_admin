@@ -3,7 +3,7 @@
     <el-breadcrumb separator-class="el-icon-arrow-right" class="user-breadcrumb">
       <el-breadcrumb-item :to="{ path: '/home' }">首页</el-breadcrumb-item>
       <el-breadcrumb-item>用户管理</el-breadcrumb-item>
-      <el-breadcrumb-item :to="{ path: '/home/users' }">用户列表</el-breadcrumb-item>
+      <el-breadcrumb-item>用户列表</el-breadcrumb-item>
     </el-breadcrumb>
     <el-row :gutter="20">
       <el-col :span="4">
@@ -215,8 +215,8 @@ export default {
               if (meta.status === 200) {
                 //  更新用户数据
                 const editUser = this.userList.find(item => item.id === id)
-                // editUser.email = data.email
-                // editUser.mobile = data.mobile
+                editUser.email = data.email
+                editUser.mobile = data.mobile
                 //  关闭对话框
                 this.userEditDialog = false
               }

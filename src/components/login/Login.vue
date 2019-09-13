@@ -46,7 +46,7 @@ export default {
     }
   },
   methods: {
-    login() {
+    /* login() {
       //  http://localhost:8888/api/private/v1/
       this.$http
         .post('/login', this.loginForm)
@@ -73,6 +73,33 @@ export default {
             })
           }
         })
+    }, */
+
+    //  使用async和await调用axios异步方法
+    async login() {
+      //  http://localhost:8888/api/private/v1/
+      const res = await this.$http.post('/login', this.loginForm)
+      //  ES6中的解构，从res.data中取出属性data和meta
+      const { data, meta } = res.data
+      // console.log(data)
+      if (meta.status === 200) {
+        this.$message({
+          type: 'success',
+          message: meta.msg,
+          duration: 1000
+        })
+        //  将返回的token存储到LocalStorage中
+        localStorage.setItem('token', data.token)
+        //  登录成功，需要跳转到后台管理的首页
+        this.$router.push('home')
+      } else {
+        // console.log('登录失败', meta.msg)
+        this.$message({
+          type: 'error',
+          message: meta.msg,
+          duration: 1000
+        })
+      }
     },
 
     submitForm() {
